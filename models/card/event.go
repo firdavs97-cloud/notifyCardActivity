@@ -24,7 +24,7 @@ type ActivityEvent struct {
 }
 
 type ActivityEventInput struct {
-	OrderType  string `json:"orderType"`g
+	OrderType  string `json:"orderType"`
 	SessionId  string `json:"sessionId"`
 	Card       string `json:"card"`
 	EventDate  string `json:"eventDate"`
