@@ -1,0 +1,2 @@
+CREATE TABLE IF NOT EXISTS cardActivityEvent(id INT PRIMARY KEY AUTO_INCREMENT, orderType varchar(20), sessionId varchar(128),
+    card varchar(30), eventDate varchar(64), websiteUrl varchar(128), status varchar(20));
