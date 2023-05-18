@@ -2,11 +2,20 @@
 Write notification service to notify user for card activities on his card. You need to write HTTP server which accepts events in JSON format via POST method and stores them in some sort of storage 
 (could store either in db or some basic memory storage). You also need to write worker/job which will notify those events to client. Notification can be mocked just by printing them to terminal.
 
-- Try to use only standard library
-- Provide instructions on how to build and run the code
-- Keep your solution simple
-- Add your solution to github and share the link with us
-- We would like to see some tests too
+- Tried to use only standard library
+- Provided instructions on how to build and run the code
+- Kept your solution simple
+- Wrote some tests too
+
+### Installation
+Run Mysql service and create database. Use the sql defined in table.sql to create the required table.
+Change the config file in config/default.yaml file with port and database full address in the form "root:yourpassword@tcp(localhost:3306)/dbname"
+Run the command on the project root directory
+```cmd
+go run cmd/app/main.go
+```
+
+You can test the server by making post request with json body as given in the example below.
 
 ### Sample Events
 ```javascript
@@ -34,14 +43,3 @@ Write notification service to notify user for card activities on his card. You n
   "websiteUrl": "https://somon.tj"
 }
 ```
-
-### Installation
-Run Mysql service and create database. Use the sql defined in table.sql to create the required table.
-Change the config file in config/default.yaml file with port and database full address in the form "root:yourpassword@tcp(localhost:3306)/dbname"
-Run the command on the project root directory
-```cmd
-go run cmd/app/main.go
-```
-
-You can test the server by making post request with json body as given in the example above.
-
