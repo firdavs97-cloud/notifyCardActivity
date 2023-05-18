@@ -1,6 +1,3 @@
-Alif developer test
-=================
-
 ## Summary
 Write notification service to notify user for card activities on his card. You need to write HTTP server which accepts events in JSON format via POST method and stores them in some sort of storage 
 (could store either in db or some basic memory storage). You also need to write worker/job which will notify those events to client. Notification can be mocked just by printing them to terminal.
