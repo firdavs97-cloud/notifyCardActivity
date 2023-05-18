@@ -2,19 +2,25 @@ package main
 
 import (
 	"log"
+	"os"
+	"stash.transparent.com/gol/notifyCardActivity/models/config"
 	"stash.transparent.com/gol/notifyCardActivity/router"
-	"stash.transparent.com/gol/notifyCardActivity/services/notify"
+	"stash.transparent.com/gol/notifyCardActivity/services/worker"
 )
 
 func main() {
-	// TODO Read from config
-	port := 3000
+	// Read from config
+	cfg, err := config.InitConfig()
+	if err != nil {
+		log.Panic(err)
+	}
+	os.Setenv("db_address", cfg.DBAddress)
 
-	eventIdChan, err := notify.StartNewProcess()
+	eventIdChan, err := worker.StartNewProcess()
 
 	if err != nil {
 		log.Panic(err)
 	}
 
-	router.Init(port, eventIdChan)
+	router.Init(cfg.Port, eventIdChan)
 }

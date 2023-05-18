@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
+	"os"
 )
 
 type Iface interface {
@@ -112,7 +113,7 @@ func (db DB) QueryRow(s string, id int64, i ...interface{}) error {
 // NewDB creates a new MySQL database connection
 func NewDB() (Iface, error) {
 	// Replace the following values with your MySQL database credentials
-	dsn := "root:123456@tcp(127.0.0.1:3307)/dbname"
+	dsn := os.Getenv("db_address")
 
 	// Create a new database connection
 	conn, err := sql.Open("mysql", dsn)

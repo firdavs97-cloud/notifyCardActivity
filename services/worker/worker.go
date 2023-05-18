@@ -1,4 +1,4 @@
-package notify
+package worker
 
 import (
 	"log"
@@ -13,10 +13,10 @@ func StartNewProcess() (*chan int64, error) {
 		return nil, err
 	}
 
-	// Create a channel to receive user data
+	// Create a channel to receive event id
 	idChan := make(chan int64)
 
-	// Start the worker to process user data
+	// Start the worker to process event data
 	go worker(idChan)
 
 	ids, err := db.QueryIds("SELECT id FROM cardActivityEvent WHERE status = ?", "pending")
@@ -31,7 +31,7 @@ func StartNewProcess() (*chan int64, error) {
 	return &idChan, nil
 }
 
-// worker processes user data and sends notifications
+// worker processes event data and sends notifications
 func worker(idsChan <-chan int64) {
 
 	for id := range idsChan {
@@ -42,7 +42,7 @@ func worker(idsChan <-chan int64) {
 
 		err := event.Load(id)
 		if err != nil {
-			log.Printf("Failed to update user notification status %s: %v", event, err)
+			log.Printf("Failed to load user notification status %s: %v", event, err)
 		}
 
 		err = event.Notify(id)
